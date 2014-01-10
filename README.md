@@ -1,4 +1,4 @@
-CSE232
-======
+C++ CSE 232 Class at Michigan State University
 
-C++ MSU
+
+==== For Personal Use ====
