@@ -1,7 +1,9 @@
 /* 
- * File:   main.cpp
+ * Project 1 - Asks for three inputs and outputs some calculations.
+ * Name: Brandon Max
  * MSU ID: maxbrand
  * Section: 002
+ * 
  * 
  * Created on January 9, 2014, 4:56 PM
  */
