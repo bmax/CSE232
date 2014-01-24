@@ -19,25 +19,30 @@ using std::cin;
 /*
  * 
  */
-int main(int argc, char** argv) {
-    long evennumber = 4;
-    long primes;
-    while ((evennumber >= 4) && (evennumber % 2) == 0) {
-        cout << "Give me an even number >= 4 or 0 to quit:" << endl;
-        cin >> evennumber;
-        if (evennumber == 0) break;
+int main() {
+	 long evennumber;
+	 long primes;
+	 cout << "Give me an even number >= 4 or 0 to quit:";
+	 cin >> evennumber;
+	 while (evennumber != 0) {
+			if (evennumber >= 4 && evennumber % 2 == 0) {
+				 for (int i = 2; i <= evennumber; i++) {
+						bool prime=true;
+						for (int ii = 2; ii < i; ii++) {
+							 if (i%ii == 0) {
+									cout << i << " off the table " << endl; 
+									break;
+							 prime=false;
+							 }
+							 cout << i << "%" << ii << " " <<i%ii << endl;
 
-        while ((evennumber < 4) || (evennumber % 2) != 0) {
-            cout << "Number must be even and <= 4, try again!" << endl;
-            cout << "Give me an even number >= 4 or 0 to quit:" << endl;
-            cin >> evennumber;
-        }
-        for (int i = 3; i >= evennumber; i++) {
-            cout << "Hello" << i << endl;
-        }
-        cout << "The number: "<<evennumber<<" is the sum of the primes: "<<primes;
-    }
-    cout << "Thanks for playing!" << endl;
-
+						}
+				 }
+			} else {
+				 cout << "Number must be even and >= 4, try again!"<<endl;
+			}
+			cout << "Give me an even number >= 4 or 0 to quit:";
+			cin >> evennumber;
+	 }
 }
 
