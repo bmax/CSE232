@@ -55,5 +55,6 @@ int main() {
 			cout << "Give me an even number >= 4 or 0 to quit:";
 			cin >> evennumber;
 	 }
+	 cout << "Thanks for playing! Come Again" << endl;
 }
 
