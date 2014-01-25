@@ -19,23 +19,34 @@ using std::cin;
 /*
  * 
  */
+long checkPrime(long numToCheck) {
+	 bool prime=true;
+	 for (long ii = 2; ii < numToCheck; ii++) {
+			if (numToCheck%ii == 0) {
+				 ii++;
+				 prime=false;
+				 break;
+			}
+
+	 }
+	 return prime;
+}				
 int main() {
 	 long evennumber;
-	 long primes;
+	 long prime1, prime2;
 	 cout << "Give me an even number >= 4 or 0 to quit:";
 	 cin >> evennumber;
 	 while (evennumber != 0) {
 			if (evennumber >= 4 && evennumber % 2 == 0) {
-				 for (int i = 2; i <= evennumber; i++) {
-						bool prime=true;
-						for (int ii = 2; ii < i; ii++) {
-							 if (i%ii == 0) {
-									cout << i << " off the table " << endl; 
+				 for (long i = 2; i <= evennumber; i++) {
+						bool prime = checkPrime(i);
+						if (prime == true){ 
+							 long difference = evennumber - i;
+							 bool prime2 = checkPrime(difference);
+							 if (prime2 == true && difference != 1) {
+									cout << "The number: " << evennumber << " is the sum of the primes: " << difference << "," << i << endl;
 									break;
-							 prime=false;
 							 }
-							 cout << i << "%" << ii << " " <<i%ii << endl;
-
 						}
 				 }
 			} else {
