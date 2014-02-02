@@ -58,7 +58,7 @@ bool narc_num(long num, long power) {
  * power, the power (order)  of the narcissistic number.
  * outputs an  integer
  */
-int check_range(long &first, long &last, long power) {
+long check_range(long first, long last, long power) {
     order_parameters(first, last);
     long sumofNN = 0;
     for (int i = first; i <= last; i++) {
