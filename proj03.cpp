@@ -12,6 +12,7 @@
  */
 
 #include <iostream>
+#include <cmath>
 
 using std::cout;
 using std::cin;
@@ -38,7 +39,16 @@ void order_parameters(long &first, long &second) {
  * 
  */
 bool narc_num(long num, long power) {
-
+    long sum = 0;
+    long newnum = num;
+    while (newnum != 0) {
+        sum += pow((newnum % 10), power);
+        newnum = newnum / 10;
+    }
+    if (sum == num) {
+        return true;
+    }
+    return false;
 }
 
 /*
@@ -48,12 +58,17 @@ bool narc_num(long num, long power) {
  * power, the power (order)  of the narcissistic number.
  * outputs an  integer
  */
-int check_range(long first, long last, long power) {
+int check_range(long &first, long &last, long power) {
     order_parameters(first, last);
+    long sumofNN = 0;
     for (int i = first; i <= last; i++) {
-        narc_num(i, power);
+        bool narcnum = narc_num(i, power);
+        if (narcnum == true) {
+            sumofNN++;
+            cout << i << " is a narcissistic number of order: " << power << endl;
+        }
     }
-    return 2;
+    return sumofNN;
 }
 
 /*
@@ -64,7 +79,8 @@ int main() {
     cout << "give space seperated start stop power:";
     cin >> first >> last >> power;
     while (first > 0 && last > 0 && power > 0) {
-        check_range(first, last, power);
+        long numofnarcs = check_range(first, last, power);
+        cout << "Saw " << numofnarcs << " order " << power << " narc numbers in the range of " << first << " to " << last << endl;
         cout << "give space seperated start stop power:";
         cin >> first >> last >> power;
     }
