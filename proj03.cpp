@@ -63,7 +63,7 @@ long check_range(long first, long last, long power) {
     long sumofNN = 0;
     for (int i = first; i <= last; i++) {
         bool narcnum = narc_num(i, power);
-        if (narcnum == true) {
+        if (narcnum) {
             sumofNN++;
             cout << i << " is a narcissistic number of order: " << power << endl;
         }
