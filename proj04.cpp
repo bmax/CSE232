@@ -6,7 +6,6 @@
  *
  * Prints out all lychrel numbers within a given range and limit.
  * 
-
  * Created on February 12, 2014, 5:24 PM
  */
 #include <iostream>
