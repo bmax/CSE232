@@ -21,11 +21,6 @@ using std::string;
  */
 long rev_num(long n) {
     long reversenum;
-    /* If I use this way to reverse the string, it does not throw
-     *  the same error that punch got, but also does not return correct results.
-     * for (reversenum=0; n; n/=10) 
-     *      reversenum = reversenum*10 + n%10;
-     */
     string snum = std::to_string(n);
     std::reverse(snum.begin(),snum.end());
     reversenum = std::stol(snum);
