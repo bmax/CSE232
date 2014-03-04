@@ -51,6 +51,11 @@ vector<string> load_word_file(string filename) {
   }
   return t;
 }
+/*
+ * Function accepts a string which is a filename specifically for in_file
+ * opens filename and splits up by new lines into vector and keeps original formatting
+ * returns vector
+ */
 vector<string> load_in_file(string filename) { 
 	 ifstream tmpfile(filename);
   string line;
