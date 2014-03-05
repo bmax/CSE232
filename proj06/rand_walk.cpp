@@ -3,7 +3,7 @@
  * Brandon Max
  * netid - maxbrand
  * Section 002
- *
+ * This program is made to similuate "walks" through nodes.
  *
  * Created on February 27, 2014, 5:24 PM
  *
@@ -62,6 +62,11 @@ long select(default_random_engine &dre, vector<long> &container) {
   uniform_int_distribution<long> dist(0,container.size()-1);
   return container.at(dist(dre));
 }
+/*
+ * Function accepts a map with a key of long, and any type value 
+ * returns a vector<long> of keys, so you can use select to get random value
+ * returns vector<long> 
+ */
 template <typename T> vector<long> get_ids(map<long, T> &randmap) {
   vector<long> nodekeys;
   for (auto itr=randmap.begin(); itr!=randmap.end();itr++) {
@@ -78,11 +83,7 @@ template <typename T> vector<long> get_ids(map<long, T> &randmap) {
  */
 map<string, long> do_walk(map<long, vector<long>> &arc_map, map<long,string> &index_map, long total_walks, long walk_length, default_random_engine &dre) {
   map<string, long> visit_count;
-  // for through total walks
-  //   find a random website in example_nodes, raise visitcount++ and then look for a arc related to that node
-  //   from that arc, look for another arc (until walk_length) or if there is none, end it.
   for (int i = 0;i<total_walks;i++) {
-    // first start by finding random website, check if it has an arc    
     bool done = false;
     vector<long> nodekeys = get_ids(index_map); 
     long firstid = select(dre,nodekeys);
