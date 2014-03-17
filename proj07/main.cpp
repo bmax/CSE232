@@ -39,7 +39,6 @@ int main () {
   assert(gburg.count("god") != 0);  
 
   read_file(decl, stop_list, "Preamble.txt");
-
   assert(decl.count("Creator")==0);
   assert(decl.count("creator")!=0);
   assert(decl.count("this")==0);
@@ -60,22 +59,24 @@ int main () {
   vector<string> decl_words = sorted_words(decl);
 
   result.clear();
-
   my_set_intersection(gburg_words.begin(), gburg_words.end(),
   		      decl_words.begin(), decl_words.end(),
   		      back_inserter(result));
 
-// copy(result.begin(), result.end(), ostream_iterator<string>(cout, ",")); cout << endl << endl;  
+  // copy(result.begin(), result.end(), ostream_iterator<string>(cout, ",")); cout << endl << endl;  
   assert(result[0]=="created");
   assert(result[result.size()-1] == "world");
 
 
   result.clear();
-
   my_set_difference(gburg_words.begin(), gburg_words.end(),
   		      decl_words.begin(), decl_words.end(),
   		      back_inserter(result));
-   copy(result.begin(), result.end(), ostream_iterator<string>(cout, ",")); cout << endl << endl;
+  // copy(result.begin(), result.end(), ostream_iterator<string>(cout, ",")); cout << endl << endl;
   assert(result[0]=="add");
   assert(result[result.size()-1] == "years");
 }
+
+
+
+  
