@@ -4,8 +4,8 @@
  * netid - maxbrand
  * Section 002
  * 
- *
- * Created on February 27, 2014, 5:24 PM
+ * This project creates a number of functions to completely read and do check on certain files.
+ * Created on March 16, 2014, 5:24 PM
  *
  */
 #include <iostream>
@@ -30,6 +30,11 @@ using std::ostringstream;
 using std::ostream_iterator;
 using std::pair;
 using std::sort;
+/*
+ * Function accepts a vector of strings and string file_name
+ * goes through each word in file and puts it into vector.
+ * returns void 
+ */
 void read_stopwords(vector<string> &v, string file_name) {
   ifstream stopfile(file_name);
   string word;
@@ -38,6 +43,11 @@ void read_stopwords(vector<string> &v, string file_name) {
   }
 }
 
+/*
+ * Function accepts a string 
+ * strips and lowercases the string 
+ * returns string 
+ */
 string lower_and_strip(string s) {
   string target = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
   string news;
@@ -49,6 +59,11 @@ string lower_and_strip(string s) {
   }
   return news;
 }
+/*
+ * Function accepts a map w/ string key and long values, vector of strings, and string file_name
+ * read through a file and if there is a word in the stop_list then don't add it to map. if there isn't a word in stop list, add it to map and update frequency 
+ * returns void 
+ */
 void read_file(map<string, long> &m,
     vector<string> &stop_list,
     string file_name) {
@@ -64,14 +79,30 @@ void read_file(map<string, long> &m,
     }
   }
 }
+/*
+ * Function accepts a pair of string key and long value
+ * used for transform to print a map. 
+ * returns string 
+ */
 string p_to_s(pair<string, long>p){
   ostringstream oss;
   oss << p.first <<"-"<<p.second;
   return oss.str();
 }
+/*
+ * Function accepts two pairs of key string and long value
+ * used for sort, returns true if s2.second is greater than s1.second if it is then swap them.
+ * returns bool 
+ */
 bool sortfreq(pair<string,long> s1, pair<string,long> s2){
   return (s2.second > s1.second);
 }
+/*
+ * Function map of string key nad long values, and an order string 
+ * goes through a map and sorts it by either alpha or frequency
+ * than prints the map.
+ * returns string 
+ */
 string print_map(map<string,long> &m, string order="alpha") {
   ostringstream oss;
   if (order=="alpha") 
@@ -83,11 +114,15 @@ string print_map(map<string,long> &m, string order="alpha") {
   }
   return oss.str(); 
 }
+/*
+ * Function accepts a map of key string and long value
+ * sorts words alphabetically and puts into vector of strings.
+ * returns void 
+ */
 vector<string> sorted_words(map<string,long> &m) {
   vector<string> v;
   for (auto ele:m) 
     v.push_back(ele.first);
-
   return v;
 }
 
