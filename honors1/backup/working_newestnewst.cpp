@@ -18,7 +18,6 @@
 #include <map>
 using std::cout;
 using std::cin;
-using std::setw;
 using std::endl;
 using std::string;
 using std::vector;
@@ -30,28 +29,19 @@ using std::stringstream;
 using std::ofstream;
 
 /*
- * Function roll dice accepts a random engine generator
- * returns a long, random number 1-6;
+ * Function roll dice accepts vector<long> and a random engine generator
+ * returns a random number 1-6;
+ * .
  */
 long roll_dice(default_random_engine &dre) {
   vector<long> die = {1,2,3,4,5,6};
   uniform_int_distribution<long> dist(0,die.size()-1);
   return die.at(dist(dre));
 }
-/*
- * Function roll two dice accepts pair of two longs and a random engine generator
- * sets hand pair to roll_Dice
- * returns void
- */
 void roll(pair<long, long> &hand, default_random_engine &dre) {
   hand.first = roll_dice(dre);
   hand.second= roll_dice(dre);
 }
-/*
- * Function accepts a hold_value, player that is total score, random engine, and two longs to keep track of 1's and double 1's
- * does all the necessary components and checks of playing the "game"
- * returns void
- */
 void take_turn(long hold_value, long &player, default_random_engine &dre, long &ones, long &doubleones) {
   bool turn = true;
   pair<long, long> hand;
@@ -87,11 +77,6 @@ void take_turn(long hold_value, long &player, default_random_engine &dre, long &
     }
   }
 }
-/*
- * Function accepts two hold values, one for each player, random engine, and two longs ot keep track of ones  
- * Calls take_turn as many times as necessary for two players to verse.
- * Returns an int based on who won.
- */
 int versus( int hold_value_one, int hold_value_two, default_random_engine &dre,long &ones, long &doubleones) {
   int r = 0;
   long player_one=0;
@@ -112,11 +97,6 @@ int versus( int hold_value_one, int hold_value_two, default_random_engine &dre,l
   player_one=0;player_two=0;
   return r;
 }
-/*
- * Function accepts long and a pair of longs
- * Adds up how many times a player won.
- * Returns void
- */
 void add_wins(long &whowon, pair<long,long> &wins) {
   if (whowon == 1) 
     wins.first++;
@@ -126,11 +106,6 @@ void add_wins(long &whowon, pair<long,long> &wins) {
     wins.second++;wins.first++;
   }
 }
-/*
- * Function accepts two hold values, a random engine generator, num of games, total games, and wins
- * Does for loop to run so many games add's wins up, tallys total games, and also does formatting
- * Returns string for formatting 
- */
 string do_games( int player_one_hold_value, int &hold_value, default_random_engine &eng, long &num_games, long &total_games, pair<long,long> &wins) {
   stringstream ios;
   long ones=0,doubleones=0;
@@ -140,11 +115,9 @@ string do_games( int player_one_hold_value, int &hold_value, default_random_engi
     total_games++;
   }
 
-  ios <<player_one_hold_value <<"\t\t\t\t\tvs\t\t\t\t"<<hold_value<<endl;
-  ios << "--------------------------"<<endl;
+  ios <<"t\t"<<player_one_hold_value <<"\t\t\t\t\tvs\t\t\t\t"<<hold_value;
   float perc = (static_cast<float>(wins.first) /num_games)*100;
-  ios <<"P1 wins: "<<setw(17)<<wins.first << endl << "P2 wins: "<<setw(17)<< wins.second <<endl<< "P1 % Of Winning: "<<setw(8)<<perc<<"%"<<endl<<"1's Rolled: "<<setw(14)<<ones<<endl<<"Double 1's Rolled: "<<setw(7)<<doubleones<<endl;
-  ios << "--------------------------"<<endl;
+  ios <<"\t\t\t\t\t\t"<<wins.first << "\t\t\t\t" << wins.second << "\t\t\t\t\t\t\t\t" <<perc<<"%"<<"\t\t\t\t\t\t\t\t\t\t"<<ones<<"\t\t\t\t\t"<<doubleones<<endl;
   return ios.str(); 
 }
 int main() {
@@ -161,8 +134,8 @@ int main() {
   ofstream output(output_file);
   //playero one and player two;
   long total_games=0;
-  output << "Total games played: "<<num_games*20<<endl;
   output << "Number of games per hold value: "<<num_games<<endl;
+  output << "P1 Hold Value\t\tvs\t\tP2 Hold Value\t\tP1 Wins\t\tP2 wins\t\tP1 winning chance(percent)\t\t# of 1's\t\t# of double 1's\n";
   for (int ii = 1; ii<=5;ii++) {
     for (int hold_value = 10; hold_value<=30;hold_value+=5) {
       if (ii ==1) {
@@ -199,6 +172,8 @@ int main() {
         }
       }
     }
+    output << "----"<<endl;
   }
+  output << "Total num of games played: " << total_games;
   output.close();
 }
