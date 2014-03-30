@@ -75,6 +75,8 @@ int main () {
   // copy(result.begin(), result.end(), ostream_iterator<string>(cout, ",")); cout << endl << endl;
   assert(result[0]=="add");
   assert(result[result.size()-1] == "years");
+  string s{'a','b','c'};
+  cout << s;
 }
 
 
