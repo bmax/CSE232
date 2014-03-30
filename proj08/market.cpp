@@ -11,6 +11,7 @@
 #include<sstream>
 #include<fstream>
 #include<vector>
+#include<algorithm>
 #include<map>
 #include "market.h"
 using std::string;
@@ -26,19 +27,19 @@ using std::toupper;
  * returns void 
  */
 Market::Market(string filename) { 
-  ifstream dow(filename);
-  string line,stockdata;
-  long date;
-  double stocknums;
-  while (getline(dow,line, '\n')) {
-    vector<double> d;
-    istringstream oss(line);
-    oss >> date;
-    while (oss >> stocknums) {
-      d.push_back(stocknums);
-    }
-    stocks[date] = d; 
-  }
+	 ifstream dow(filename);
+	 string line,stockdata;
+	 long date;
+	 double stocknums;
+	 while (getline(dow,line, '\n')) {
+			vector<double> d;
+			istringstream oss(line);
+			oss >> date;
+			while (oss >> stocknums) {
+				 d.push_back(stocknums);
+			}
+			stocks[date] = d; 
+	 }
 }
 /*
  * get price function
@@ -46,18 +47,18 @@ Market::Market(string filename) {
  * returns double
  */
 double Market::get_price(string stock, long date) {
-  string stockupper;
-  // uppercase the stock
-  for (string::size_type i=0; i<stock.length(); ++i)
-    stockupper += toupper(stock[i]);
-  // find if there is a stock in symbols;
-  auto where = find(symbols.begin(),symbols.end(),stockupper); 
-  if (where != symbols.end()) {
-    int location = where-symbols.begin();
-    auto stockmap = stocks.find(date);
-    if (stockmap != stocks.end()) { 
-      return stockmap->second.at(location);
-    }
-  }
-  return -1.0;
+	 string stockupper;
+	 // uppercase the stock
+	 for (string::size_type i=0; i<stock.length(); ++i)
+			stockupper += toupper(stock[i]);
+	 // find if there is a stock in symbols;
+	 auto where = find(symbols.begin(),symbols.end(),stockupper); 
+	 if (where != symbols.end()) {
+			int location = where-symbols.begin();
+			auto stockmap = stocks.find(date);
+			if (stockmap != stocks.end()) { 
+				 return stockmap->second.at(location);
+			}
+	 }
+	 return -1.0;
 }
