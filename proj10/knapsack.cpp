@@ -30,7 +30,7 @@ Knapsack::Knapsack(long max) {
  * Deletes data array
  */
 Knapsack::~Knapsack(){
-    delete [] data_;
+  delete [] data_;
 }
 /*
  * weight function
