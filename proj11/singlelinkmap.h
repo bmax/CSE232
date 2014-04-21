@@ -73,6 +73,8 @@ template<typename Key_Type, typename Value_Type>
 SingleLinkMap<Key_Type,Value_Type>::SingleLinkMap(SingleLinkMap<Key_Type,Value_Type> &l){
     // Fix me
     if (this != &l) {
+      begin_=nullptr;
+      last_=nullptr;
         for (auto ptr = l.begin_; ptr!=nullptr; ptr = ptr->next_) {
             append_back(ptr->key_,ptr->value_);
         }
